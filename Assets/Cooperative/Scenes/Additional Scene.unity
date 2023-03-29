@@ -218,7 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6263f46f1a55ba41ab3c0413830b063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractOnce: 0
+  CanInteract: 1
+  HideInteractAbility: 0
   _sphereMaterial: {fileID: 2100000, guid: 1179ca7a536dd9e4c948b73e889f9a16, type: 2}
   _defaultColor: {r: 0.26779988, g: 0.7695146, b: 0.8018868, a: 1}
   _interactColor: {r: 0.9056604, g: 0.25119257, b: 0.25119257, a: 1}
