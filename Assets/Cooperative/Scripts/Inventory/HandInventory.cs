@@ -19,19 +19,7 @@ public class HandInventory : Inventory
         HoldedPickup.transform.forward = _handPoint.forward;
 
         if (Input.GetKeyDown(_dropKey))
-        {
-            var pickup = HoldedPickup;
-
-            if (pickup.CanDrop)
-            {
-                RemovePickup(pickup);
-                pickup.OnDrop();
-            }
-            else
-            {
-                pickup.OnDropFailed();
-            }
-        }
+            HoldedPickup.OnDrop(this);
     }
 
     public override void AddPickup(Pickup pickup)
@@ -40,7 +28,6 @@ public class HandInventory : Inventory
             throw new Exception("Hand Inventory is full");
 
         HoldedPickup = pickup;
-        pickup.DisablePhysics();
         pickup.transform.position = _handPoint.position;
         pickup.transform.forward = _handPoint.forward;
     }
@@ -50,8 +37,8 @@ public class HandInventory : Inventory
         if (HoldedPickup != pickup) return;
 
         HoldedPickup = null;
-        pickup.EnablePhysics();
     }
 
+    public override bool ContainsPickup(Pickup pickup) => HoldedPickup == pickup;
     public override bool IsFull() => HoldedPickup != null;
 }
