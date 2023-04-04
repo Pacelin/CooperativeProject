@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Cooperative/Example/Example Scene 2.unity
     guid: 53fbd9cd35500384a8ef5c57abf571f1
+  - enabled: 1
+    path: Assets/Cooperative/Example/Example Scene 3.unity
+    guid: dc6e9da37262bda42bf192617e89d47b
   m_configObjects: {}

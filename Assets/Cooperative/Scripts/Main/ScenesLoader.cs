@@ -39,10 +39,12 @@ public class ScenesLoader : MonoBehaviour
         _finishElevator.transform.position = _currentInitializer.FinishElevatorPoint.position;
         _finishElevator.transform.rotation = _currentInitializer.FinishElevatorPoint.rotation;
 
-        Player.FPSController.transform.position = _startElevator.PlayerPoint.position;
-        Player.FPSController.transform.rotation = _startElevator.PlayerPoint.rotation;
+        _startElevator.button.CanInteract = false;
+        _finishElevator.button.CanInteract = true;
+        _startElevator.button.HideInteraction = true;
+        _finishElevator.button.HideInteraction = false;
 
-        yield return Fade(_fadeColor, Color.clear, _fadeOutTime);
+        yield return new WaitForSeconds(Random.Range(3, 10)); // a little bit if waiting time
         
         _startElevator.Open();
         _finishElevator.Open();
@@ -53,10 +55,13 @@ public class ScenesLoader : MonoBehaviour
         _startElevator.Close();
         _finishElevator.Close();
 
-        yield return Fade(Color.clear, _fadeColor, _fadeInTime);
+        yield return new WaitForSeconds(Random.Range(3, 10)); // a little bit if waiting time
 
         _currentInitializer.DeinitializeScene();
         yield return SceneManager.UnloadSceneAsync(_currentScene);
+
+        (_startElevator,_finishElevator) = (_finishElevator, _startElevator);
+
         yield return SceneLoading(buildIndex);
     }
 

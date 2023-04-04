@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-    public Transform PlayerPoint;
+    public ElevatorButton button;
     [SerializeField] private Animator _liftAnimator;
     [SerializeField] private bool _opened;
     [SerializeField] private TMP_Text _authorText;

@@ -6,7 +6,8 @@ public class ElevatorButton : Interactable
 
     public override void OnInteractDown(Interactor interactor)
     {
-        _loader.GoToNextScene();
+        if (CanInteract) _loader.GoToNextScene();
+
     }
 
     public override void OnInteractUp(Interactor interactor) { }
