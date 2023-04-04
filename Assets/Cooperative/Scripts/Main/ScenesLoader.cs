@@ -1,52 +1,72 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScenesLoader : MonoBehaviour
 {
-    [SerializeField] private Elevator _elevator;
+    [SerializeField] private Elevator _startElevator;
+    [SerializeField] private Elevator _finishElevator;
+    [Space]
+    [SerializeField] private Image _fadeImage;
+    [SerializeField] private Color _fadeColor;
+    [SerializeField] private float _fadeInTime;
+    [SerializeField] private float _fadeOutTime;
 
     private int _currentScene;
     private CooperativeInitialization _currentInitializer;
 
-    private void Awake()
+    private void Awake() 
     {
-        LoadScene(1);
+        _fadeImage.color = _fadeColor;
+        StartCoroutine(SceneLoading(1));
     }
+    public void GoToNextScene() => StartCoroutine(SceneSwitching(_currentScene + 1));
 
-    public void GoToNextScene()
-    {
-        UnloadLastScene();
-    }
-
-    private void LoadScene(int buildIndex)
+    private IEnumerator SceneLoading(int buildIndex)
     {
         _currentScene = buildIndex;
-        var op = SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
-        op.completed += OnLoadScene;
-    }
+        yield return SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
 
-    private void UnloadLastScene()
-    {
-        _currentInitializer.DeinitializeScene();
-        var op = SceneManager.UnloadSceneAsync(_currentScene);
-        op.completed += OnUnloadLastScene;
-    }
-
-    private void OnUnloadLastScene(AsyncOperation op)
-    {
-        LoadScene(_currentScene + 1);
-    }
-
-    private void OnLoadScene(AsyncOperation op)
-    {
         _currentInitializer = FindObjectOfType<CooperativeInitialization>();
         _currentInitializer.InitializeScene();
-        
-        _elevator.SetStartPoint(_currentInitializer.StartLiftPosition);
-        _elevator.SetFinishPoint(_currentInitializer.FinishLiftPosition);
-        _elevator.SetAuthor(_currentInitializer.AuthorName);
 
-        _elevator.MoveToStartPoint();
-        Player.FPSController.transform.position = _elevator.PlayerPoint.position;
+        _startElevator.SetAuthor(_currentInitializer.AuthorName);
+        _startElevator.transform.position = _currentInitializer.StartElevetorPoint.position;
+        _startElevator.transform.rotation = _currentInitializer.StartElevetorPoint.rotation;
+
+        _finishElevator.SetAuthor(_currentInitializer.AuthorName);
+        _finishElevator.transform.position = _currentInitializer.FinishElevatorPoint.position;
+        _finishElevator.transform.rotation = _currentInitializer.FinishElevatorPoint.rotation;
+
+        Player.FPSController.transform.position = _startElevator.PlayerPoint.position;
+        Player.FPSController.transform.rotation = _startElevator.PlayerPoint.rotation;
+
+        yield return Fade(_fadeColor, Color.clear, _fadeOutTime);
+        
+        _startElevator.Open();
+        _finishElevator.Open();
+    }
+
+    private IEnumerator SceneSwitching(int buildIndex)
+    {
+        _startElevator.Close();
+        _finishElevator.Close();
+
+        yield return Fade(Color.clear, _fadeColor, _fadeInTime);
+
+        _currentInitializer.DeinitializeScene();
+        yield return SceneManager.UnloadSceneAsync(_currentScene);
+        yield return SceneLoading(buildIndex);
+    }
+
+    private IEnumerator Fade(Color from, Color to, float fadeTime)
+    {
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            _fadeImage.color = Color.Lerp(from, to, t / fadeTime);
+            yield return null;
+        }
+        _fadeImage.color = to;
     }
 }

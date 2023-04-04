@@ -2,9 +2,11 @@ using UnityEngine;
 
 public abstract class CooperativeInitialization : MonoBehaviour
 {
+    [Header("Cooperative Settings")]
     public string AuthorName;
-    public Vector3 StartLiftPosition;
-    public Vector3 FinishLiftPosition;
+    [Space]
+    public Transform StartElevetorPoint;
+    public Transform FinishElevatorPoint;
 
     public abstract void InitializeScene();
     public abstract void DeinitializeScene();
