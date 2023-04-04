@@ -7,18 +7,13 @@ public class ScenesLoader : MonoBehaviour
 {
     [SerializeField] private Elevator _startElevator;
     [SerializeField] private Elevator _finishElevator;
-    [Space]
-    [SerializeField] private Image _fadeImage;
-    [SerializeField] private Color _fadeColor;
-    [SerializeField] private float _fadeInTime;
-    [SerializeField] private float _fadeOutTime;
+    [SerializeField] private float _elevatorDelay;
 
     private int _currentScene;
     private CooperativeInitialization _currentInitializer;
 
     private void Awake() 
     {
-        _fadeImage.color = _fadeColor;
         StartCoroutine(SceneLoading(1));
     }
     public void GoToNextScene() => StartCoroutine(SceneSwitching(_currentScene + 1));
@@ -29,7 +24,6 @@ public class ScenesLoader : MonoBehaviour
         yield return SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
 
         _currentInitializer = FindObjectOfType<CooperativeInitialization>();
-        _currentInitializer.InitializeScene();
 
         _startElevator.SetAuthor(_currentInitializer.AuthorName);
         _startElevator.transform.position = _currentInitializer.StartElevetorPoint.position;
@@ -39,11 +33,12 @@ public class ScenesLoader : MonoBehaviour
         _finishElevator.transform.position = _currentInitializer.FinishElevatorPoint.position;
         _finishElevator.transform.rotation = _currentInitializer.FinishElevatorPoint.rotation;
 
-        Player.FPSController.transform.position = _startElevator.PlayerPoint.position;
-        Player.FPSController.transform.rotation = _startElevator.PlayerPoint.rotation;
+        Player.FPSController.transform.TeleportRelative(_finishElevator.PlayerPoint, _startElevator.PlayerPoint);
 
-        yield return Fade(_fadeColor, Color.clear, _fadeOutTime);
+        _currentInitializer.InitializeScene();
         
+        yield return new WaitForSecondsRealtime(_elevatorDelay);
+
         _startElevator.Open();
         _finishElevator.Open();
     }
@@ -52,21 +47,10 @@ public class ScenesLoader : MonoBehaviour
     {
         _startElevator.Close();
         _finishElevator.Close();
-
-        yield return Fade(Color.clear, _fadeColor, _fadeInTime);
-
         _currentInitializer.DeinitializeScene();
+
+        yield return new WaitForSecondsRealtime(_elevatorDelay);
         yield return SceneManager.UnloadSceneAsync(_currentScene);
         yield return SceneLoading(buildIndex);
-    }
-
-    private IEnumerator Fade(Color from, Color to, float fadeTime)
-    {
-        for (float t = 0; t < fadeTime; t += Time.deltaTime)
-        {
-            _fadeImage.color = Color.Lerp(from, to, t / fadeTime);
-            yield return null;
-        }
-        _fadeImage.color = to;
     }
 }
