@@ -1,10 +1,12 @@
+using TMPro;
 using UnityEngine;
 
-public class Lift : MonoBehaviour
+public class Elevator : MonoBehaviour
 {
     public Transform PlayerPoint;
     [SerializeField] private Animator _liftAnimator;
     [SerializeField] private bool _opened;
+    [SerializeField] private TextMeshProUGUI _authorText;
 
     private Vector3 _startPoint;
     private Vector3 _finishPoint;
@@ -27,6 +29,6 @@ public class Lift : MonoBehaviour
     public void SetFinishPoint(Vector3 point) => _finishPoint = point;
     public void SetAuthor(string name)
     {
-        
+        _authorText.text = name;
     }
 }

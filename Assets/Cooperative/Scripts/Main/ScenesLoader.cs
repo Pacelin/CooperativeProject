@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesLoader : MonoBehaviour
 {
-    [SerializeField] private Lift _lift;
+    [SerializeField] private Elevator _elevator;
 
     private int _currentScene;
     private CooperativeInitialization _currentInitializer;
@@ -42,11 +42,11 @@ public class ScenesLoader : MonoBehaviour
         _currentInitializer = FindObjectOfType<CooperativeInitialization>();
         _currentInitializer.InitializeScene();
         
-        _lift.SetStartPoint(_currentInitializer.StartLiftPosition);
-        _lift.SetFinishPoint(_currentInitializer.FinishLiftPosition);
-        _lift.SetAuthor(_currentInitializer.AuthorName);
+        _elevator.SetStartPoint(_currentInitializer.StartLiftPosition);
+        _elevator.SetFinishPoint(_currentInitializer.FinishLiftPosition);
+        _elevator.SetAuthor(_currentInitializer.AuthorName);
 
-        _lift.MoveToStartPoint();
-        Player.FPSController.transform.position = _lift.PlayerPoint.position;
+        _elevator.MoveToStartPoint();
+        Player.FPSController.transform.position = _elevator.PlayerPoint.position;
     }
 }
