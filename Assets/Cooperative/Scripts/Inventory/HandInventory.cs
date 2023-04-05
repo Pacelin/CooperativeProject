@@ -39,6 +39,10 @@ public class HandInventory : Inventory
         HoldedPickup = null;
     }
 
+    public override void RemovePickup(int index) => HoldedPickup = null;
+
+    public override Pickup GetPickup(int index) => HoldedPickup;
+
     public override bool ContainsPickup(Pickup pickup) => HoldedPickup == pickup;
     public override bool IsFull() => HoldedPickup != null;
 }
