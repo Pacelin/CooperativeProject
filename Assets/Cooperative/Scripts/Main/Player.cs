@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static bool IsInitialized => _instance != null;
     public static Camera PlayerCamera => _instance._playerCamera;
     public static FirstPersonController FPSController => _instance._personController;
     public static Interactor Interactor => _instance._interactor;

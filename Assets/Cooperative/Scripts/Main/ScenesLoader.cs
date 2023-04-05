@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,11 +15,11 @@ public class ScenesLoader : MonoBehaviour
 
     private void Awake() 
     {
-        StartCoroutine(SceneLoading(1));
+        StartCoroutine(SceneLoading(1, true));
     }
     public void GoToNextScene() => StartCoroutine(SceneSwitching(_currentScene + 1));
 
-    private IEnumerator SceneLoading(int buildIndex)
+    private IEnumerator SceneLoading(int buildIndex, bool first = false)
     {
         _currentScene = buildIndex;
         yield return SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
@@ -27,14 +28,22 @@ public class ScenesLoader : MonoBehaviour
         _currentInitializer = FindObjectOfType<CooperativeInitialization>();
 
         _startElevator.SetAuthor(_currentInitializer.AuthorName);
-        _startElevator.transform.position = _currentInitializer.StartElevetorPoint.position;
-        _startElevator.transform.rotation = _currentInitializer.StartElevetorPoint.rotation;
+        _startElevator.transform.position = _currentInitializer.StartElevatorPoint.position;
+        _startElevator.transform.rotation = _currentInitializer.StartElevatorPoint.rotation;
 
         _finishElevator.SetAuthor(_currentInitializer.AuthorName);
         _finishElevator.transform.position = _currentInitializer.FinishElevatorPoint.position;
         _finishElevator.transform.rotation = _currentInitializer.FinishElevatorPoint.rotation;
-
-        Player.FPSController.transform.TeleportRelative(_finishElevator.PlayerPoint, _startElevator.PlayerPoint);
+        
+        if (first)
+        {
+            Player.FPSController.transform.position = _startElevator.PlayerPoint.position;
+            Player.FPSController.transform.rotation = _startElevator.PlayerPoint.rotation;
+        }
+        else
+        {
+            Player.FPSController.transform.TeleportRelative(_finishElevator.PlayerPoint, _startElevator.PlayerPoint);
+        }
 
         _currentInitializer.InitializeScene();
         
