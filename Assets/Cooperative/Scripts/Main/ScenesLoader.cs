@@ -23,6 +23,7 @@ public class ScenesLoader : MonoBehaviour
         _currentScene = buildIndex;
         yield return SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
 
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(buildIndex));
         _currentInitializer = FindObjectOfType<CooperativeInitialization>();
 
         _startElevator.SetAuthor(_currentInitializer.AuthorName);
