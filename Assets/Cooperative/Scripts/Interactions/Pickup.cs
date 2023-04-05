@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Pickup : Interactable
 {
     [Header("Pickup Settings")]
-    private Rigidbody _selfRigidbody;
+    [SerializeField] private Rigidbody _selfRigidbody;
 
     public sealed override void OnInteractDown(Interactor interactor) => OnTake(interactor.Inventory);
     public sealed override void OnInteractUp(Interactor interactor) { }
