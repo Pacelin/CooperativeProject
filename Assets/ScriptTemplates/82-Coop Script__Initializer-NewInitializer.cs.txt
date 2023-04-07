@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace ENTER_YOUR_NAME_HERE
+{
+	public class #SCRIPTNAME# : Initializer
+	{
+		public sealed override void InitializeScene()
+		{
+		#NOTRIM#
+		}
+		public sealed override void DeinitializeScene() 
+		{
+		#NOTRIM#
+		}
+	}
+}

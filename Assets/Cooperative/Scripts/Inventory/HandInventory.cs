@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class HandInventory : Inventory
 {
+    public override bool IsFull => HoldedPickup != null;
+    public override bool IsEmpty => HoldedPickup == null;
+
     public Vector3 HandPosition => _handPoint.position;
     public Vector3 HandDirection => _handPoint.forward;
 
     public Pickup HoldedPickup { get; private set; }
- 
+
     [SerializeField] private Transform _handPoint;
     [SerializeField] private KeyCode _dropKey = KeyCode.Q;
 
@@ -24,7 +27,7 @@ public class HandInventory : Inventory
 
     public override void AddPickup(Pickup pickup)
     {
-        if (IsFull())
+        if (IsFull)
             throw new Exception("Hand Inventory is full");
 
         HoldedPickup = pickup;
@@ -40,9 +43,7 @@ public class HandInventory : Inventory
     }
 
     public override void RemovePickup(int index) => HoldedPickup = null;
-
     public override Pickup GetPickup(int index) => HoldedPickup;
-
     public override bool ContainsPickup(Pickup pickup) => HoldedPickup == pickup;
-    public override bool IsFull() => HoldedPickup != null;
+    public override void Clear() => HoldedPickup = null;    
 }

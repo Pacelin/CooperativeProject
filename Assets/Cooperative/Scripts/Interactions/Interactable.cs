@@ -7,7 +7,7 @@ public abstract class Interactable : MonoBehaviour
     public bool CanInteract;
     public bool HideInteraction;
     [Space]
-    [SerializeField] protected Color _intractorColor = new Color(1, 1, 1, 0.8f);
+    [SerializeField] protected Color _interactorColor = new Color(1, 1, 1, 0.8f);
     [SerializeField] protected float _interactorScale = 1.1f;
     [Space]
     [SerializeField] protected Collider _selfCollider;
@@ -15,7 +15,7 @@ public abstract class Interactable : MonoBehaviour
     public virtual void OnInteractorEnter(Interactor interactor)
     {
         if (!HideInteraction)
-            interactor.Crosshair.Set(_intractorColor, _interactorScale);
+            interactor.Crosshair.Set(_interactorColor, _interactorScale);
     }
 
     public virtual void OnInteractorExit(Interactor interactor)
