@@ -956,7 +956,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPoint: {fileID: 371161177}
   _liftAnimator: {fileID: 1193719499}
-  _opened: 1
   _authorText: {fileID: 378507980}
 --- !u!4 &1193719501
 Transform:
@@ -1126,7 +1125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPoint: {fileID: 2006794023868540185}
   _liftAnimator: {fileID: 2006794023082552203}
-  _opened: 1
   _authorText: {fileID: 2006794023877955468}
 --- !u!4 &2006794023082552205
 Transform:

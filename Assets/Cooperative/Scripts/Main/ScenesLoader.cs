@@ -23,7 +23,7 @@ public class ScenesLoader : MonoBehaviour
         _currentScene = buildIndex;
 
         yield return SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
-        yield return StartCoroutine(InitializeScene(SceneManager.GetSceneByBuildIndex(buildIndex), teleport));
+        yield return InitializeScene(SceneManager.GetSceneByBuildIndex(buildIndex), teleport);
 
         _startElevator.Open();
         _finishElevator.Open();
@@ -54,10 +54,6 @@ public class ScenesLoader : MonoBehaviour
         _startElevator.SetAuthor(_currentInitializer.AuthorName);
         _startElevator.transform.position = _currentInitializer.StartElevatorPoint.position;
         _startElevator.transform.rotation = _currentInitializer.StartElevatorPoint.rotation;
-
-        _finishElevator.SetAuthor(_currentInitializer.AuthorName);
-        _finishElevator.transform.position = _currentInitializer.FinishElevatorPoint.position;
-        _finishElevator.transform.rotation = _currentInitializer.FinishElevatorPoint.rotation;
         
         if (teleport)
         {
@@ -68,6 +64,10 @@ public class ScenesLoader : MonoBehaviour
             Player.FPSController.transform.position = _startElevator.PlayerPoint.position;
             Player.FPSController.transform.rotation = _startElevator.PlayerPoint.rotation;
         }
+
+        _finishElevator.SetAuthor(_currentInitializer.AuthorName);
+        _finishElevator.transform.position = _currentInitializer.FinishElevatorPoint.position;
+        _finishElevator.transform.rotation = _currentInitializer.FinishElevatorPoint.rotation;
 
         _currentInitializer.InitializeScene();
         

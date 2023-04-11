@@ -7,14 +7,12 @@ public class InteractorRay : MonoBehaviour
 
     public bool Enabled => _enabled;
     public GameObject LookAtGameObject { get; private set; }
-    public float RayDistance => _rayDistance;
+    public float RayDistance { get => _rayDistance; set => _rayDistance = value; }
 
     [SerializeField] private bool _enabled;
     [SerializeField] private float _rayDistance;
     [SerializeField] private LayerMask _rayMask;
     [SerializeField] private Transform _rayPoint;
-
-    public void SetRayDistance(float distance) => _rayDistance = distance;
 
     public void Enable()
     {

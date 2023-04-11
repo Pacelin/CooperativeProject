@@ -14,6 +14,8 @@ public class HandInventory : Inventory
     [SerializeField] private Transform _handPoint;
     [SerializeField] private KeyCode _dropKey = KeyCode.Q;
 
+    private LayerMask _lastLayer;
+
     private void Update()
     {
         if (HoldedPickup == null) return;
@@ -31,19 +33,24 @@ public class HandInventory : Inventory
             throw new Exception("Hand Inventory is full");
 
         HoldedPickup = pickup;
+        _lastLayer = pickup.gameObject.layer;
         pickup.transform.position = _handPoint.position;
         pickup.transform.forward = _handPoint.forward;
+        pickup.gameObject.layer = LayerMask.NameToLayer("Overlay");
     }
 
     public override void RemovePickup(Pickup pickup)
     {
-        if (HoldedPickup != pickup) return;
-
-        HoldedPickup = null;
+        if (HoldedPickup == pickup) Clear();
     }
 
-    public override void RemovePickup(int index) => HoldedPickup = null;
+    public override void RemovePickup(int index) => Clear();
     public override Pickup GetPickup(int index) => HoldedPickup;
     public override bool ContainsPickup(Pickup pickup) => HoldedPickup == pickup;
-    public override void Clear() => HoldedPickup = null;    
+    public override void Clear() 
+    {
+        if (HoldedPickup != null)
+        HoldedPickup.gameObject.layer = _lastLayer;
+        HoldedPickup = null;
+    }
 }
