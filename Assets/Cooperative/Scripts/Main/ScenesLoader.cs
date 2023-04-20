@@ -11,7 +11,7 @@ public class ScenesLoader : MonoBehaviour
     private int _currentScene;
     private Initializer _currentInitializer;
 
-    private void Awake() 
+    private void Start() 
     {
         StartCoroutine(SceneLoading(1, false));
     }
