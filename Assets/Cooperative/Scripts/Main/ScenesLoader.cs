@@ -48,7 +48,7 @@ public class ScenesLoader : MonoBehaviour
     {
         var delayHalf = Random.Range(_elevatorDelayRange.x, _elevatorDelayRange.y) / 2;
         
-        yield return new WaitForSecondsRealtime(delayHalf);
+		if (teleport) yield return new WaitForSecondsRealtime(delayHalf);
 
         SceneManager.SetActiveScene(scene);
         _currentInitializer = FindObjectOfType<Initializer>();
