@@ -21,8 +21,9 @@ public class ScenesLoader : MonoBehaviour
     private IEnumerator SceneLoading(int buildIndex, bool teleport = true)
     {
         _currentScene = buildIndex;
-
-        yield return SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
+		
+		var loadOperation = SceneManager.LoadSceneAsync(_currentScene, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => loadOperation.isDone);
         yield return InitializeScene(SceneManager.GetSceneByBuildIndex(buildIndex), teleport);
 
         _startElevator.Open();
@@ -37,8 +38,9 @@ public class ScenesLoader : MonoBehaviour
         
         Player.Inventory.Clear();
         _currentInitializer.DeinitializeScene();
-
-        yield return SceneManager.UnloadSceneAsync(_currentScene);
+	
+		var unloadOperation = SceneManager.UnloadSceneAsync(_currentScene);
+        yield return new WaitUntil(() => unloadOperation.isDone);
         yield return SceneLoading(buildIndex);
     }
 
