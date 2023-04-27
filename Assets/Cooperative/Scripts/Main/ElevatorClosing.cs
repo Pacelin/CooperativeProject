@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -9,7 +7,7 @@ public class ElevatorClosing : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player"))
+		if (_elevator.Opened && other.CompareTag("Player"))
 			_elevator.Close();
 	}
 }

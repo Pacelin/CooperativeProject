@@ -20,11 +20,16 @@ public class HandInventory : Inventory
     {
         if (HoldedPickup == null) return;
 
-        HoldedPickup.transform.position = _handPoint.position;
-        HoldedPickup.transform.forward = _handPoint.forward;
-
         if (Input.GetKeyDown(_dropKey))
             HoldedPickup.OnDrop(this);
+    }
+
+    private void LateUpdate()
+    {
+        if (HoldedPickup == null) return;
+
+        HoldedPickup.transform.position = _handPoint.position;
+        HoldedPickup.transform.forward = _handPoint.forward;
     }
 
     public override void AddPickup(Pickup pickup)

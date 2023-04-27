@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
+    public bool Opened { get; private set; }
     public Transform PlayerPoint;
     [SerializeField] private AudioSource _selfAudioSource;
     [SerializeField] private AudioClip _openClip;
@@ -16,6 +17,7 @@ public class Elevator : MonoBehaviour
         _liftAnimator.SetBool("opened", true);
         _selfAudioSource.clip = _openClip;
         _selfAudioSource.Play();
+        Opened = true;
     }
     public void Close() 
     {
@@ -23,6 +25,7 @@ public class Elevator : MonoBehaviour
         _liftAnimator.SetBool("opened", false);
         _selfAudioSource.clip = _closeClip;
         _selfAudioSource.Play();
+        Opened = false;
     }
 
     public void SetAuthor(string name)
