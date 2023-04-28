@@ -12,6 +12,7 @@ public class HandInventory : Inventory
     public Pickup HoldedPickup { get; private set; }
 
     [SerializeField] private Transform _handPoint;
+    [SerializeField] private FixedJoint _joint;
     [SerializeField] private KeyCode _dropKey = KeyCode.Q;
 
     private LayerMask _lastLayer;
@@ -24,14 +25,6 @@ public class HandInventory : Inventory
             HoldedPickup.OnDrop(this);
     }
 
-    private void LateUpdate()
-    {
-        if (HoldedPickup == null) return;
-
-        HoldedPickup.transform.position = _handPoint.position;
-        HoldedPickup.transform.forward = _handPoint.forward;
-    }
-
     public override void AddPickup(Pickup pickup)
     {
         if (IsFull)
@@ -39,9 +32,10 @@ public class HandInventory : Inventory
 
         HoldedPickup = pickup;
         _lastLayer = pickup.gameObject.layer;
-        pickup.transform.position = _handPoint.position;
-        pickup.transform.forward = _handPoint.forward;
-        pickup.gameObject.layer = LayerMask.NameToLayer("Overlay");
+        pickup.transform.position = _handPoint.TransformPoint(pickup.PickupInHandOffset);
+        pickup.transform.rotation = _handPoint.rotation * Quaternion.Euler(pickup.PickupInHandRotation);
+        _joint.connectedBody = pickup.Rigidbody;
+        pickup.gameObject.layer = LayerMask.NameToLayer("Pickup");
     }
 
     public override void RemovePickup(Pickup pickup)
@@ -54,7 +48,9 @@ public class HandInventory : Inventory
     public override bool ContainsPickup(Pickup pickup) => HoldedPickup == pickup;
     public override void Clear() 
     {
-        if (HoldedPickup != null)
+        if (HoldedPickup == null) return;
+        
+        _joint.connectedBody = null;
         HoldedPickup.gameObject.layer = _lastLayer;
         HoldedPickup = null;
     }

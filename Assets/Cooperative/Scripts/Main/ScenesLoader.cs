@@ -34,7 +34,7 @@ public class ScenesLoader : MonoBehaviour
     {
         _startElevator.Close();
         _finishElevator.Close();
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(3f);
         
         Player.Inventory.Clear();
         _currentInitializer.DeinitializeScene();

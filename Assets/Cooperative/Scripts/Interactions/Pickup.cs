@@ -3,8 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Pickup : Interactable
 {
+    public Rigidbody Rigidbody => _selfRigidbody;
+    public Vector3 PickupInHandOffset => _pickupInHandOffset;
+    public Vector3 PickupInHandRotation => _pickupInHandRotation;
+
     [Header("Pickup Settings")]
     [SerializeField] protected Rigidbody _selfRigidbody;
+    [Space]
+    [SerializeField] protected Vector3 _pickupInHandOffset = Vector3.zero;
+    [SerializeField] protected Vector3 _pickupInHandRotation = Vector3.zero;
 
     public sealed override void OnInteractDown(Interactor interactor)
     {
@@ -15,27 +22,11 @@ public abstract class Pickup : Interactable
 
     public virtual void OnTake(Inventory inventory)
     {
-        if (_selfCollider != null)
-        {
-            _selfRigidbody.isKinematic = true;
-            _selfRigidbody.detectCollisions = false;
-        }
-        if (_selfCollider != null)
-            _selfCollider.enabled = true;
-
         inventory.AddPickup(this);
     }
     
     public virtual void OnDrop(Inventory inventory)
     {
-        if (_selfCollider != null)
-        {
-            _selfRigidbody.isKinematic = false;
-            _selfRigidbody.detectCollisions = true;
-        }
-        if (_selfCollider != null)
-            _selfCollider.enabled = true;
-
         inventory.RemovePickup(this);
     }
 }
