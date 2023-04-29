@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HandInventory : Inventory
 {
+    public Transform HandPoint => _handPoint;
+    public FixedJoint Joint => _joint;
+    
     public override bool IsFull => HoldedPickup != null;
     public override bool IsEmpty => HoldedPickup == null;
 
