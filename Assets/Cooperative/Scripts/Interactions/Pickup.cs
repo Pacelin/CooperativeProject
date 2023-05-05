@@ -13,6 +13,11 @@ public abstract class Pickup : Interactable
     [SerializeField] protected Vector3 _pickupInHandOffset = Vector3.zero;
     [SerializeField] protected Vector3 _pickupInHandRotation = Vector3.zero;
 
+    protected virtual void Awake()
+    {
+        _selfRigidbody.solverIterations = 50;
+    }
+
     public sealed override void OnInteractDown(Interactor interactor)
     {
         if (interactor.Inventory.IsFull) return;
