@@ -4,7 +4,6 @@ using UnityEngine;
 public class HandInventory : Inventory
 {
     public Transform HandPoint => _handPoint;
-    public FixedJoint Joint => _joint;
     
     public override bool IsFull => HoldedPickup != null;
     public override bool IsEmpty => HoldedPickup == null;
@@ -15,7 +14,6 @@ public class HandInventory : Inventory
     public Pickup HoldedPickup { get; private set; }
 
     [SerializeField] private Transform _handPoint;
-    [SerializeField] private FixedJoint _joint;
     [SerializeField] private KeyCode _dropKey = KeyCode.Q;
 
     private LayerMask _lastLayer;
@@ -28,6 +26,14 @@ public class HandInventory : Inventory
             HoldedPickup.OnDrop(this);
     }
 
+    private void LateUpdate()
+    {
+        if (HoldedPickup == null) return;
+
+        HoldedPickup.transform.position = _handPoint.TransformPoint(HoldedPickup.PickupInHandOffset);
+        HoldedPickup.transform.rotation = _handPoint.rotation * Quaternion.Euler(HoldedPickup.PickupInHandRotation);
+    }
+
     public override void AddPickup(Pickup pickup)
     {
         if (IsFull)
@@ -35,10 +41,14 @@ public class HandInventory : Inventory
 
         HoldedPickup = pickup;
         _lastLayer = pickup.gameObject.layer;
-        pickup.transform.position = _handPoint.TransformPoint(pickup.PickupInHandOffset);
-        pickup.transform.rotation = _handPoint.rotation * Quaternion.Euler(pickup.PickupInHandRotation);
-        _joint.connectedBody = pickup.Rigidbody;
+        //pickup.transform.position 
+        //pickup.transform.rotation = ;
+        //_joint.connectedBody = pickup.Rigidbody;
         pickup.gameObject.layer = LayerMask.NameToLayer("Pickup");
+        pickup.Rigidbody.isKinematic = true;
+        HoldedPickup.Collider.enabled = false;
+        HoldedPickup.Rigidbody.MovePosition(_handPoint.TransformPoint(HoldedPickup.PickupInHandOffset));
+        HoldedPickup.Rigidbody.MoveRotation(_handPoint.rotation * Quaternion.Euler(HoldedPickup.PickupInHandRotation));
     }
 
     public override void RemovePickup(Pickup pickup)
@@ -53,7 +63,9 @@ public class HandInventory : Inventory
     {
         if (HoldedPickup == null) return;
         
-        _joint.connectedBody = null;
+        //_joint.connectedBody = null;
+        HoldedPickup.Rigidbody.isKinematic = false;
+        HoldedPickup.Collider.enabled = true;
         HoldedPickup.gameObject.layer = _lastLayer;
         HoldedPickup = null;
     }

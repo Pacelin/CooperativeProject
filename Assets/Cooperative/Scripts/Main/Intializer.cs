@@ -12,7 +12,10 @@ public abstract class Initializer : MonoBehaviour
     private void Awake()
     {
         if (!Player.IsInitialized)
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        {
+            ScenesLoader.FirstSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+        }
     }
 
     public abstract void InitializeScene();

@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Pickup : Interactable
 {
     public Rigidbody Rigidbody => _selfRigidbody;
+    public Collider Collider => _selfCollider;
     public Vector3 PickupInHandOffset => _pickupInHandOffset;
     public Vector3 PickupInHandRotation => _pickupInHandRotation;
 

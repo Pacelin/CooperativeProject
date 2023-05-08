@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class ScenesLoader : MonoBehaviour
 {
+    public static int FirstSceneBuildIndex { get; set; }
+    [SerializeField] private int _exitSceneIndex = 0;
     [SerializeField] private Elevator _startElevator;
     [SerializeField] private Elevator _finishElevator;
     [MinMaxSlider(1, 15)] [SerializeField] private Vector2 _elevatorDelayRange = new Vector2(3, 6);
@@ -13,7 +15,7 @@ public class ScenesLoader : MonoBehaviour
 
     private void Start() 
     {
-        StartCoroutine(SceneLoading(1, false));
+        StartCoroutine(SceneLoading(FirstSceneBuildIndex, false));
     }
 
     public void GoToNextScene() => StartCoroutine(SceneSwitching(_currentScene + 1));
@@ -32,9 +34,17 @@ public class ScenesLoader : MonoBehaviour
 
     private IEnumerator SceneSwitching(int buildIndex)
     {
+        PlayerPrefs.SetInt("last_level", buildIndex);
+
         _startElevator.Close();
         _finishElevator.Close();
         yield return new WaitForSecondsRealtime(3f);
+
+        if (buildIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(_exitSceneIndex, LoadSceneMode.Single);
+            yield break;
+        }
         
         Player.Inventory.Clear();
         _currentInitializer.DeinitializeScene();
