@@ -38,7 +38,7 @@ public class ScenesLoader : MonoBehaviour
 
         _startElevator.Close();
         _finishElevator.Close();
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
 
         if (buildIndex >= SceneManager.sceneCountInBuildSettings)
         {
@@ -58,7 +58,7 @@ public class ScenesLoader : MonoBehaviour
     {
         var delayHalf = Random.Range(_elevatorDelayRange.x, _elevatorDelayRange.y) / 2;
         
-		if (teleport) yield return new WaitForSecondsRealtime(delayHalf);
+		if (teleport) yield return new WaitForSeconds(delayHalf);
 
         SceneManager.SetActiveScene(scene);
         _currentInitializer = FindObjectOfType<Initializer>();
@@ -83,6 +83,6 @@ public class ScenesLoader : MonoBehaviour
 
         _currentInitializer.InitializeScene();
         
-        yield return new WaitForSecondsRealtime(delayHalf);
+        yield return new WaitForSeconds(delayHalf);
     }
 }
