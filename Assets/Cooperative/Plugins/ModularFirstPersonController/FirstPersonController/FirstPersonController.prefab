@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _handPoint: {fileID: 6417216273862901307}
-  _joint: {fileID: 8819116474353052687}
   _dropKey: 113
 --- !u!54 &9071434245467205647
 Rigidbody:
@@ -131,7 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCamera: {fileID: 4459864851310106426}
-  _overlayCamera: {fileID: 0}
   _personController: {fileID: 4459864850019384740}
   _interactor: {fileID: 6035552562592290580}
   _inventory: {fileID: 353259448244534094}
@@ -548,7 +546,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 70
   orthographic: 0
