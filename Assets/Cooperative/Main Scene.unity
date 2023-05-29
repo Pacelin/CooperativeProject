@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: 570117746}
   - component: {fileID: 570117745}
   - component: {fileID: 570117744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1493,7 @@ GameObject:
   - component: {fileID: 693748320}
   - component: {fileID: 693748319}
   - component: {fileID: 693748318}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1690,7 +1690,7 @@ GameObject:
   - component: {fileID: 765513531}
   - component: {fileID: 765513530}
   - component: {fileID: 765513529}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cabin_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1923,7 +1923,7 @@ GameObject:
   - component: {fileID: 895599547}
   - component: {fileID: 895599546}
   - component: {fileID: 895599545}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door_Left_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3007,7 +3007,7 @@ GameObject:
   - component: {fileID: 1185634239}
   - component: {fileID: 1185634238}
   - component: {fileID: 1185634237}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door_Right_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3776,7 +3776,7 @@ GameObject:
   - component: {fileID: 1270130061}
   - component: {fileID: 1270130060}
   - component: {fileID: 1270130059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lamp Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6233,7 +6233,7 @@ GameObject:
   - component: {fileID: 7561576747621602878}
   - component: {fileID: 4780827069552090008}
   - component: {fileID: 5259072793683001133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lamp Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6282,7 +6282,7 @@ GameObject:
   - component: {fileID: 899245843512364899}
   - component: {fileID: 448340211288170175}
   - component: {fileID: 6941646183704570005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6790,7 +6790,7 @@ GameObject:
   - component: {fileID: 1062843958539918451}
   - component: {fileID: 4138551520391294746}
   - component: {fileID: 5040830325935452483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6955,7 +6955,7 @@ GameObject:
   - component: {fileID: 1411833417251387851}
   - component: {fileID: 8842029463087663766}
   - component: {fileID: 1037576223949314297}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door_Left_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6974,7 +6974,7 @@ GameObject:
   - component: {fileID: 8975121572390751983}
   - component: {fileID: 5164741024132959389}
   - component: {fileID: 8724688304227488445}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cabin_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7245,7 +7245,7 @@ GameObject:
   - component: {fileID: 7497820550021975560}
   - component: {fileID: 8200282754815881207}
   - component: {fileID: 6474888340399566465}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door_Right_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
