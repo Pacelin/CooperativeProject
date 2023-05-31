@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028335, g: 0.22571331, b: 0.30692235, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028381, g: 0.22571406, b: 0.30692294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -682,6 +682,8 @@ MonoBehaviour:
   _interactorScale: 1.1
   _selfCollider: {fileID: 365138844}
   _selfRigidbody: {fileID: 365138843}
+  _pickupInHandOffset: {x: 0, y: 0, z: 0}
+  _pickupInHandRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &385891679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1011,8 @@ MonoBehaviour:
   _interactorScale: 1.1
   _selfCollider: {fileID: 423406798}
   _selfRigidbody: {fileID: 423406797}
+  _pickupInHandOffset: {x: 0, y: 0, z: 0}
+  _pickupInHandRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &558259276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1408,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1758,6 +1762,8 @@ MonoBehaviour:
   _interactorScale: 1.1
   _selfCollider: {fileID: 820150785}
   _selfRigidbody: {fileID: 820150784}
+  _pickupInHandOffset: {x: 0, y: 0, z: 0}
+  _pickupInHandRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &1006853679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,6 +1897,8 @@ MonoBehaviour:
   _interactorScale: 1.1
   _selfCollider: {fileID: 1006853682}
   _selfRigidbody: {fileID: 1006853681}
+  _pickupInHandOffset: {x: 0, y: 0, z: 0}
+  _pickupInHandRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &1011888187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,7 +1986,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
